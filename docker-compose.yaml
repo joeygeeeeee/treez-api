@@ -1,0 +1,32 @@
+version: '3'
+services:
+  treez-api:
+    ports:
+      - "3000:3000"
+    networks:
+      - treez
+    volumes:
+      - ./src:/app/src
+      - ./test:/app/test
+      - ./data:/app/data
+      - ./integration-test:/app/integration-test
+    build:
+      context: ./
+    depends_on:
+      - db
+    environment:
+      TREEZ_PORT: ${TREEZ_PORT}
+      TREEZ_MONGO_CONNECTION_STRING: "mongodb://treez:password@db/treez"
+  db:
+    image: mongo:4.2.3
+    volumes:
+      - ./docker/mongo/:/docker-entrypoint-initdb.d
+    environment:
+      MONGO_INITDB_DATABASE: treez
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    networks:
+      - treez
+networks:
+  treez:
+      
