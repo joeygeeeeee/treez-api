@@ -3,9 +3,10 @@ WORKDIR /app
 
 COPY yarn.lock ./
 COPY package.json ./
-COPY ./src ./
-COPY ./integration-test ./
-COPY ./tsconfig.json ./
+COPY ./src ./src
+COPY ./integration-test ./integration-test
+COPY ./mock-data ./mock-data
+COPY ./tsconfig.json ./tsconfig.json
 
 EXPOSE 3000
 

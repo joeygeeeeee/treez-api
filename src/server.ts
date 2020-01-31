@@ -21,14 +21,19 @@ export interface TreezApp {
   app: Express
   destroy: () => void
 }
-export const server: (opts: ServerOpts) => Promise<TreezApp> = async ({ config }) => {
+
+let app: Express
+let server: Server
+
+export const init: (opts: ServerOpts) => Promise<TreezApp> = async ({ config }) => {
+  if (!app) {
+    app = express()
+  }
 
   const connectionString = config.mongo.connectionString
 
   console.log(`Connecting to: ${connectionString}`)
   await mongoose.connect(connectionString)
-
-  const app = express()
 
   const port = config.port
 
@@ -40,9 +45,11 @@ export const server: (opts: ServerOpts) => Promise<TreezApp> = async ({ config }
 
   app.get('/', (req, res) => res.sendStatus(200))
 
-  const server = app.listen({ port }, () => {
-    console.log(`🚀 Server ready at http://localhost:${port}`)
-  })
+  if(!server) {
+    server = app.listen({ port }, () => {
+      console.log(`🚀 Server ready at http://localhost:${port}`)
+    })
+  }
 
   return {
     app,

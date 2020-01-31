@@ -6,8 +6,8 @@ const validator = createValidator()
 export const inventoriesResourceValidator = validator.body(Joi.object({
     name: Joi.string().required(),
     description: Joi.string().required(),
-    price: Joi.number().min(0),
-    quantity: Joi.number()
+    price: Joi.number().min(0).required(),
+    quantity: Joi.number().required()
 }))
 
 export interface InventoriesResourceRequestSchema extends ValidatedRequestSchema {

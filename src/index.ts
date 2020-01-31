@@ -1,4 +1,4 @@
-import { server } from './server'
+import { init } from './server'
 import { config } from './config'
 
-server({ config })
+init({ config })
