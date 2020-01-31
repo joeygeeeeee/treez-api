@@ -1,6 +1,6 @@
 ## Treez API
 ### System Dependencies
-- Docker (Recommended)
+- Docker
 - Node > 10
 - yarn (Recommended)
 ### Configure
