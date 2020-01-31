@@ -32,7 +32,6 @@ export const init: (opts: ServerOpts) => Promise<TreezApp> = async ({ config }) 
 
   const connectionString = config.mongo.connectionString
 
-  console.log(`Connecting to: ${connectionString}`)
   await mongoose.connect(connectionString)
 
   const port = config.port
